@@ -1,0 +1,69 @@
+﻿@{
+    var banner= "banner-lg";
+    var namePage =LayoutData.Instance.NamePage;
+    if(ViewBag.PageCode ==-2)
+    {
+        banner ="banner-sm";
+        namePage ="Kết quả tìm kiếm";
+    }
+}
+
+@section scripts{
+    <script src="~/js/pagination.js"></script> 
+    <script src="~/js/product.js"></script> 
+}
+<span id="page" data-code=@ViewBag.PageCode></span>
+<!--Banner lager-->
+<div class="container-fluid">
+    <div class='@banner section'>
+        <p class="white mb-0">@namePage</p>
+    </div>
+</div>
+<!--List product-->
+<div class="container">
+    <!--Filter-->
+    @if (@ViewBag.PageCode == -2)
+    { 
+        int count = ViewBag.ResultCount == null ? 0: ViewBag.ResultCount;
+        <p style="padding-left: 1.45em" >Có @count sản phẩm phù hợp từ khoá " @ViewBag.TextSearch "</p>
+    }
+    <div class="filter contents mb-4">
+        <div class="row align-content-center">
+            <div id="orderby" class="d-flex">
+                <a class="nav-item active" data-index="0" title="Phổ biến" >phổ biển</a>
+                <a class="nav-item" data-index="1" title="Giá cao">giá cao</a>
+                <a class="nav-item" data-index="2" title="Giá thấp">giá thấp</a>
+            </div>
+            @if (ViewBag.Wires !=null)
+            {
+            <div class="dropdown ml-lg-auto pl-2 pl-lg-0">
+                <div class="select">
+                    <span>Loại dây</span>
+                    <i class="las la-angle-down"></i>
+                </div>
+                <input id="filter" type="hidden" name="filter">
+                
+                   <ul class="dropdown-menu bg-white">
+                    <li data-code="0">Tất cả</li>  
+                    @foreach (var item in ViewBag.Wires)
+                    {
+                        <li data-code="@item.Id">@item.Name</li>
+                    }  
+                </ul> 
+                
+            </div>
+            }
+        </div>
+    </div>
+    <!--Products-->
+    <div class="contents">
+        <div id="product-container">
+            <div class="loader"><div></div><div></div><div></div><div></div></div>
+        </div>
+    </div>
+    <!--Pagnation-->
+    <div class="pagnation contents section">
+    </div> 
+</div>
+
+

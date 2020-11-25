@@ -1,0 +1,164 @@
+﻿@model aspcore_watchshop.ViewModels.ProductVM;
+@section css{
+    <link rel="stylesheet" href="~/css/product-detail.css" >
+}
+@section scripts{
+    <script src="~/js/product-detail.js"></script>
+}
+<!--Banner small-->
+<div class="container-fluid">
+    <div class="banner-sm section">
+        <p class="white m-0">Chi tiết sản phẩm</p>
+    </div>
+</div>
+<!--Prodcut Detail-->
+<div class="container">
+    <div class="product-detail contents" >
+        <!--Product info -->
+        <div class="section">
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-5">
+                    <div id="gallery"> 
+                        <div class="img-content mb-4">
+                            <div class="img">
+                            </div>
+                        </div> 
+                        <a class="arrow-prev white"><i class="las la-angle-left"></i></a>
+                        <a class="arrow-next white"><i class="las la-angle-right"></i></a>
+                    </div>                  
+                    <div id="gallery-nav">
+                        <div class="img">
+                            <img src="~/products/img.jpg">
+                        </div>
+                        <div class="img">
+                            <img src="~/products/img3.jpg">
+                        </div>
+                        <div class="img">
+                            <img src="~/products/img2.jpg">
+                        </div>
+                        <div class="img">
+                            <img src="~/products/img3.jpg">
+                        </div>
+                        <div class="img">
+                            <img src="~/products/img3.jpg">
+                        </div>
+                    </div>                            
+                </div>
+                <div class="col-12 col-md-6 col-lg-7">
+                    <div class="product-text" data-itemid="@Model.Id">
+                        <h1 class="normal mb-3 text-2">Đồng hồ @Model.BandName @Model.Name</h1>
+                        <div class="">
+                            <p class="italic bold mb-0">Thương hiệu: <span class="pl-2 normal "> @Model.BandName </span></p>
+                            <p class="italic bold mb-0">Loại dây: <span class="pl-2 normal "> @Model.WireName  </span></p>
+                            <p class="italic bold mb-0">Phân loại: <span class="pl-2 normal"> @Model.CategoryName</span></p>
+                        </div>
+                        <div class="text-4 ">
+                            <p class="italic bold mb-0"> Giá:
+                            <span data-price="@Model.Price" class="text-4 red bold d-block d-lg-inline-block mb-1 pr-2" >0 đ</span>
+                            <del data-discount="@Model.Discount" class="normal text-sub">0 đ</del>
+                            </p>
+                        </div>
+                        <div class="product-policy mb-4">
+                            <p class="italic bold mb-0">Ưu đãi</p>
+                            <div class="policy-container border-black">
+                                @foreach (var item in ViewBag.Policies)
+                                {
+                                <div class="policy-item">
+                                    <span class="policy-icon">
+                                        <iframe src="@item.Icon" width="30px" height="30px" frameBorder="0"></iframe>
+                                    </span>
+                                    <div class="policy-text">
+                                        <p class="mb-0" >@item.PolicyContent</p>
+                                    </div>
+                                </div>
+                                }
+                            </div>
+                        </div>         
+                        <div class="group-btns text-center mb-3">
+                            <a class="buy-now btn btn-lg white bg-red mb-3"  >Mua ngay</a>
+                            <a class="to-cart btn btn-lg white bg-black ">Thêm vào giỏ hàng</a>
+                        </div>
+                        <span class="text-sub text-center d-block">Hoặc đặt mua qua facebook tại <a class="link blue" href="@LayoutData.Instance.Messenger"> ĐÂY </a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Product description-->
+        <div class="section">
+            <div class="row">
+                <div class="col-12 col-lg-5">
+                    <h3 class="mb-4">Thông số</h3>
+                    <table class="table table-color">
+                    <tbody>
+                            <tr>
+                                <td scope="row">thương hiệu</td>
+                                <td>@Model.BandName</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">xuất xứ</td>
+                                <td>@ViewBag.Detail.Origin</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">phân loại</td>
+                                <td>@Model.CategoryName</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">kính</td>
+                                <td>@ViewBag.Detail.TypeGlass</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">thông số</td>
+                                <td>@ViewBag.Detail.Parameter</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">máy</td>
+                                <td>@ViewBag.Detail.TypeMachine</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">niềng</td>
+                                <td>@ViewBag.Detail.TypeBorder</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">dây đeo</td>
+                                <td>@Model.WireName</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">chống nước</td>
+                                <td>@ViewBag.Detail.ResistWater</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">chức năng</td>
+                                <td>@ViewBag.Detail.Func</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">nơi sản xuất</td>
+                                <td>@ViewBag.Detail.Origin</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">bảo hành</td>
+                                <td>@ViewBag.Detail.Warranty</td>
+                            </tr>
+                    </tbody>
+                    </table>
+                </div>
+                <div class="col-12 col-lg-7">
+                    <h3 class="mb-4">Giới thiệu</h3>
+                    <div id="posts">
+                        @if(ViewBag.Post == null){
+                            <p>Chưa có bài giới thiệu</p>
+                        }else{
+                            @ViewBag.Post.PostContent;
+                        }
+                    </div>
+                </div>
+            </div> 
+        </div>
+        <!--Product Other-->
+        <div class="section">
+            <h3 class="text-center mb-4 mb-lg-5">Sản phẩm tương tự</h3>
+            <div id="product-container-other">
+                <div class="loader"><div></div><div></div><div></div><div></div></div>
+            </div>
+        </div> 
+    </div>
+</div>
